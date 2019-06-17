@@ -1,0 +1,19 @@
+{
+  "Routes" : [
+    { 
+      "route" : "/haloStats/Hello-World",
+      "file" : "Halo/src.php",
+      "function" : "helloWorld"
+    },
+    { 
+      "route" : "/haloStats/home",
+      "file" : "Halo/src.php",
+      "function" : "homePage"
+    },
+    { 
+      "route" : "/haloStats/lowercase",
+      "file" : "Halo/src.php",
+      "function" : "lowercase"
+    }
+  ]
+}
