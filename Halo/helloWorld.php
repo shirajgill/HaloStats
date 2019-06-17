@@ -23,7 +23,7 @@ $(document).ready(function(){
   $("#submitText").click(function(){
     $.ajax({
       type : "POST",
-      url: "/haloStats/lowercase",
+      url: "/haloStats/haloStats/lowercase",
       data: {
         textToLower : $("#getText").val()
       },
