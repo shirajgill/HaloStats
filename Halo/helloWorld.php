@@ -12,7 +12,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-  Enter Text: <input id="getText" type="text" name="text"><br>
+  Enter Text: <input id="getText" type="text" disabled value="hsingh97" name="text"><br>
   <input id="submitText" type="submit" value="Submit">
   <div id="textfield">
   
@@ -23,12 +23,12 @@ $(document).ready(function(){
   $("#submitText").click(function(){
     $.ajax({
       type : "POST",
-      url: "HaloStats/lowercase",
+      url: "HaloStats/playerstats",
       data: {
-        textToLower : $("#getText").val()
+        gamertag : $("#getText").val()
       },
       success: function(result) {
-        $("#textfield").html(result);
+        $("#textfield").html("<pre>" + result + "</pre>");
       }, 
       error: function(result) {
 

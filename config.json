@@ -14,6 +14,11 @@
       "route" : "/haloStats/lowercase",
       "file" : "Halo/src.php",
       "function" : "lowercase"
+    },
+    { 
+      "route" : "/haloStats/playerStats",
+      "file" : "Halo/src.php",
+      "function" : "getPlayerStats"
     }
   ]
 }
