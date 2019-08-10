@@ -10,6 +10,7 @@ function homePage () {
 }
 
 function getPlayerProfilePage() {
+  echo "ff";
   $player = $_POST["gamertag"];
   $profile = API::getPlayerProfile($player);
   $ajaxResponse = array(
