@@ -2,15 +2,15 @@
 /* Dispatcher, Uses current directory to get JSON configuration:
     config.json
 */  
-
-__autoload(function ($class) {
+function __autoload($class) {
 	$file = $_SERVER["DOCUMENT_ROOT"]. "\\HaloStats\\Halo\\" .	str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
 	if (file_exists($file)) {
 			require $file;
 			return true;
 	}
 	return false;
-});
+}
+
 
 // Read JSON file
 $json = file_get_contents('config.json');
