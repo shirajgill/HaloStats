@@ -12,13 +12,10 @@ function homePage () {
 function getPlayerProfilePage() {
   $player = $_POST["gamertag"];
   $profile = API::getPlayerProfile($player);
-  echo json_encode($player); 
-  exit();
+
   $ajaxResponse = array(
     "profilePage" => (new ProfilePage($profile))->getHtml()
   );
-  echo json_encode($ajaxResponse); 
-  exit();
 }
 
 ?>
