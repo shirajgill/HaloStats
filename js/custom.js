@@ -7,7 +7,7 @@ $(document).ready(function(){
 function submitGamerTag() {
   $.ajax({
     type : "POST",
-    url: "HaloStats/playerstats",
+    url: "/HaloStats/playerstats",
     data: {
       gamertag : $("#getMatches").val()
     },
