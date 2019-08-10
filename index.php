@@ -20,7 +20,9 @@ $json_data = json_decode($json, true);
 
 foreach ($json_data["Routes"] as $route) {
 	if (strpos(strtolower($_SERVER['REQUEST_URI']), strtolower($route["route"])) !== false) {
-		echo "__" . $route; exit();
+		if (strpos(strtolower($_SERVER['REQUEST_URI']), "player" !== false)) {
+		echo "__" . $_SERVER['REQUEST_URI']; die;
+		}
 		include $route["file"];
 		call_user_func($route["function"]);
 	}
