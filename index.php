@@ -3,12 +3,14 @@
     config.json
 */  
 function __autoload($class) {
-	echo $_SERVER["DOCUMENT_ROOT"];
+	
 	$file = $_SERVER["DOCUMENT_ROOT"]. "\\HaloStats\\Halo\\" .	str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
 	if (file_exists($file)) {
 			require $file;
+			echo " file found" . $_SERVER["DOCUMENT_ROOT"];
 			return true;
 	}
+	echo "file not found: " . $_SERVER["DOCUMENT_ROOT"];
 	return false;
 }
 
