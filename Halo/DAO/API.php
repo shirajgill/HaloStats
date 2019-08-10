@@ -8,8 +8,6 @@ class API {
   private static $apiKey = "818de354856940f3845a13ddcc70672e";
 
   public function getPlayerProfile($gamerTag) {
-    echo json_encode($gamerTag); 
-    exit();
     $response = Self::getPlayerStats($gamerTag);
     $profile = new Profile($gamerTag); 
     $profile->setTotalKills($response->ArenaStats->TotalKills)
