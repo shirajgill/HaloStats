@@ -3,7 +3,7 @@
     config.json
 */  
 
-spl_autoload_register(function ($class) {
+__autoload(function ($class) {
 	$file = $_SERVER["DOCUMENT_ROOT"]. "\\HaloStats\\Halo\\" .	str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
 	if (file_exists($file)) {
 			require $file;

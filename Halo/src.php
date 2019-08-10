@@ -16,6 +16,8 @@ function getPlayerProfilePage() {
   $ajaxResponse = array(
     "profilePage" => (new ProfilePage($profile))->getHtml()
   );
+  echo json_encode($ajaxResponse); 
+  exit();
 }
 
 ?>
