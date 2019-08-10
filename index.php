@@ -3,6 +3,15 @@
     config.json
 */  
 
+spl_autoload_register(function ($class) {
+	$file = $_SERVER["DOCUMENT_ROOT"]. "\\HaloStats\\Halo\\" .	str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
+	if (file_exists($file)) {
+			require $file;
+			return true;
+	}
+	return false;
+});
+
 // Read JSON file
 $json = file_get_contents('config.json');
 
@@ -15,13 +24,4 @@ foreach ($json_data["Routes"] as $route) {
 		call_user_func($route["function"]);
 	}
 }
-  /*
-	if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
-		$uri = 'https://';
-	} else {
-		$uri = 'http://';
-	}
-	$uri .= $_SERVER['HTTP_HOST'];
-	echo "$uri";
-	exit;*/
 ?>
