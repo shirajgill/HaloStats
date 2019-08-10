@@ -11,7 +11,8 @@ function homePage () {
 
 function getPlayerProfilePage() {
   $player = $_POST["gamertag"];
-  $profile = API::getPlayerProfile($player);
+
+  $profile = (new API())->getPlayerProfile($player);
 
   $ajaxResponse = array(
     "profilePage" => (new ProfilePage($profile))->getHtml()
