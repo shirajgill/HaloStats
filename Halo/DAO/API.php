@@ -1,40 +1,95 @@
 <?php
 
 namespace DAO;
-use Data\Profile;
+use Data\ArenaProfile;
 
 class API {
 
   private static $apiKey = "818de354856940f3845a13ddcc70672e";
+  private static $huskyRaidId = "f7473936-59d7-4099-81c4-316f2ed9f42c";
+  private static $infectionId = "84d7dafa-0419-4e6f-a990-4987ae57611c";
+  private static $superFiestaId = "f0c9ef9a-48bd-4b24-9db3-2c76b4e23450";
+  private static $arenaStats = null;
 
-  public function getPlayerProfile($gamerTag) {
-    $response = Self::getPlayerStats($gamerTag);
-    $profile = new Profile($gamerTag); 
-    $profile->setTotalKills($response->ArenaStats->TotalKills)
-      ->setTotalDeaths($response->ArenaStats->TotalDeaths)
-      ->setTotalShotsFired($response->ArenaStats->TotalShotsFired)
-      ->setTotalShotsLanded($response->ArenaStats->TotalShotsLanded)
-      ->setTotalGamesPlayed($response->ArenaStats->TotalGamesCompleted)
-      ->setTotalGamesWon($response->ArenaStats->TotalGamesWon)
-      ->setTotalGamesLost($response->ArenaStats->TotalGamesLost)
-      ->setTotalTimePlayed($response->ArenaStats->TotalTimePlayed)
-      ->setSpartanRank($response->SpartanRank)
+  public static function getPlayerOverallStats($gamerTag) {
+    $stats = Self::getPlayerStatsForPlaylist($gamerTag);
+    $profile = Self::createProfileForPlaylistStat($gamerTag, $stats);
+    $profile->setSpartanRank(json_decode(Self::$arenaStats)->Results[0]->Result->SpartanRank)
       ->setSpartanImage(Self::getPlayerImage($gamerTag))
       ->setSpartanEmblem(Self::getPlayerEmblem($gamerTag));
     return $profile;
   }
-  
-  private static function getPlayerStats($gamerTag) {
+
+  public static function getPlayerHuskyRaidStats($gamerTag) {
+    $playlistStat = Self::getPlayerStatsForPlaylist($gamerTag, Self::$huskyRaidId);
+    $profile = Self::createProfileForPlaylistStat($gamerTag, $playlistStat); 
+    return $profile;
+  }
+
+  public static function getPlayerSuperFiestaStats($gamerTag) {
+    $playlistStat = Self::getPlayerStatsForPlaylist($gamerTag, Self::$superFiestaId);
+    $profile = Self::createProfileForPlaylistStat($gamerTag, $playlistStat); 
+    return $profile;
+  }
+
+  public static function getPlayerInfectionStats($gamerTag) {
+    $playlistStat = Self::getPlayerStatsForPlaylist($gamerTag, Self::$infectionId);
+    $profile = Self::createProfileForPlaylistStat($gamerTag, $playlistStat); 
+    return $profile;
+  }
+
+  private static function createProfileForPlaylistStat($gamerTag, $playlistStat) {
+    $profile = new ArenaProfile($gamerTag); 
+    if ($playlistStat == null) {
+      $playlistStat = (array)$playlistStat;
+      $playlistStat["TotalKills"] = 0;
+      $playlistStat["TotalDeaths"] = 0;
+      $playlistStat["TotalShotsFired"] = 0;
+      $playlistStat["TotalShotsLanded"] = 0;
+      $playlistStat["TotalGamesCompleted"] = 0;
+      $playlistStat["TotalGamesWon"] = 0;
+      $playlistStat["TotalGamesLost"] = 0;
+      $playlistStat["TotalTimePlayed"] = 0;
+      $playlistStat = (object)$playlistStat;
+      
+    }
+    $profile->setTotalKills($playlistStat->TotalKills)
+      ->setTotalDeaths($playlistStat->TotalDeaths)
+      ->setTotalShotsFired($playlistStat->TotalShotsFired)
+      ->setTotalShotsLanded($playlistStat->TotalShotsLanded)
+      ->setTotalGamesPlayed($playlistStat->TotalGamesCompleted)
+      ->setTotalGamesWon($playlistStat->TotalGamesWon)
+      ->setTotalGamesLost($playlistStat->TotalGamesLost)
+      ->setTotalTimePlayed($playlistStat->TotalTimePlayed);
+    return $profile;
+  }
+
+  private static function getPlayerStatsForPlaylist($gamerTag, $playlistId = null) {
     $gamerTag = urlencode($gamerTag);
-    $url = "https://www.haloapi.com/stats/h5/servicerecords/arena?players=$gamerTag";
-    $response = self::queryAPI($url);
+    $url = "https://www.haloapi.com/stats/h5/servicerecords/arena?players=$gamerTag&seasonId=NonSeasonal";
+    if (Self::$arenaStats == null) {
+      $response = self::queryAPI($url);
+      Self::$arenaStats = $response;
+    } else {
+      $response = Self::$arenaStats;
+    }
     $response = json_decode($response)->Results[0]->Result;
-    return $response;
+
+    if ($playlistId == null) {
+      return $response->ArenaStats;
+    }
+
+    foreach ($response->ArenaStats->ArenaPlaylistStats as $playlistStat) {
+      if ($playlistStat->PlaylistId == $playlistId) {
+        return $playlistStat;
+      }
+    }
+    return null;
   }
 
   private static function getPlayerImage($gamerTag) {
     $gamerTag = urlencode($gamerTag);
-    $url = "https://www.haloapi.com/profile/h5/profiles/$gamerTag/spartan?size=190";
+    $url = "https://www.haloapi.com/profile/h5/profiles/$gamerTag/spartan?size=512";
     $response = self::queryAPI($url);
     $response = base64_encode($response);
     return $response;
@@ -60,6 +115,7 @@ class API {
 
     //Query the API using the HTTP headers set above
     $apiResponse = file_get_contents($url, false, $context);    
+    
     return $apiResponse;
   }
 }

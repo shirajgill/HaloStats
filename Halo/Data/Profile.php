@@ -10,10 +10,6 @@ class Profile {
   private $totalDeaths;
   private $totalShotsFired;
   private $totalShotsLanded;
-  private $totalGamesPlayed;
-  private $totalGamesWon;
-  private $totalGamesLost;
-  private $totalTimePlayed;
   private $spartanRank;
   
   function __construct($gamerTag) {
@@ -64,34 +60,6 @@ class Profile {
   }
   function getTotalShotsLanded() {
     return $this->totalShotsLanded;
-  }
-  function setTotalGamesPlayed($totalGamesPlayed) {
-    $this->totalGamesPlayed = $totalGamesPlayed;
-    return $this;
-  }
-  function getTotalGamesPlayed() {
-    return $this->totalGamesPlayed;
-  }
-  function setTotalGamesWon($totalGamesWon) {
-    $this->totalGamesWon = $totalGamesWon;
-    return $this;
-  }
-  function getTotalGamesWon() {
-    return $this->totalGamesWon;
-  }
-  function setTotalGamesLost($totalGamesLost) {
-    $this->totalGamesLost = $totalGamesLost;
-    return $this;
-  }
-  function getTotalGamesLost() {
-    return $this->totalGamesLost;
-  }
-  function setTotalTimePlayed($totalTimePlayed) {
-    $this->totalTimePlayed = $totalTimePlayed;
-    return $this;
-  }
-  function getTotalTimePlayed() {
-    return $this->totalTimePlayed;
   }
   function setSpartanRank($spartanRank) {
     $this->spartanRank = $spartanRank;
