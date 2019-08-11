@@ -2,7 +2,7 @@
 
 namespace Data;
 
-class Profile {
+class Profile implements \JsonSerializable {
   private $gamerTag;
   private $spartanImage;
   private $spartanEmblem;
@@ -16,6 +16,11 @@ class Profile {
     $this->gamerTag = $gamerTag;
   }
   
+  function jsonSerialize() {
+    $vars = get_object_vars($this);
+    return $vars;
+  }
+
   function getGamerTag(){
     return $this->gamerTag;
   }

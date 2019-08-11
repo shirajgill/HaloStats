@@ -42,7 +42,7 @@ class ProfilePage {
             <a class="nav-link active text-white" id="overall-tab" data-toggle="tab" href="#overall" role="tab" aria-controls="home" aria-selected="true">Overall</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" id="husky-tab" data-toggle="tab" href="#husky" role="tab" aria-controls="profile" aria-selected="false">Husky</a>
+            <a class="nav-link text-white" id="husky-tab" data-toggle="tab" href="#husky" role="tab" aria-controls="profile" aria-selected="false">Husky Raid</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" id="superFiesta-tab" data-toggle="tab" href="#superFiesta" role="tab" aria-controls="contact" aria-selected="false">Super Fiesta</a>

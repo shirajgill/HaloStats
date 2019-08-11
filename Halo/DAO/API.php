@@ -2,6 +2,8 @@
 
 namespace DAO;
 use Data\ArenaProfile;
+use Data\Match;
+use Data\Profile;
 
 class API {
 
@@ -84,6 +86,8 @@ class API {
         return $playlistStat;
       }
     }
+
+    
     return null;
   }
 
@@ -101,6 +105,27 @@ class API {
     $response = self::queryAPI($url);
     $response = base64_encode($response);
     return $response;
+  }
+
+  public static function getPlayerMatches($gamerTag) {
+    $encodedGamerTag = urlencode($gamerTag);
+    $url = "https://www.haloapi.com/stats/h5/players/$encodedGamerTag/matches?modes=arena&count=10&include-times=true";
+    $response = self::queryAPI($url);
+    $response = json_decode($response)->Results;
+    $matches = array();
+    foreach ($response as $match) {
+      $currMatch = new Match($gamerTag, $match->Id->MatchId, $match->MapId, $match->MatchCompletedDate->ISO8601Date);
+      foreach ($match->Teams as $team) {
+        $currMatch->addScore($team->Score, $team->Id);
+      }
+      $currMatch->setResultOfMatch($match->Players[0]->Result);
+      $playerProfile = new Profile($gamerTag);
+      $playerProfile->setTotalKills($match->Players[0]->TotalKills);
+      $playerProfile->setTotalDeaths($match->Players[0]->TotalDeaths);
+      $currMatch->addToPlayerList($playerProfile);
+      $matches[] = $currMatch;
+    }
+    return $matches;
   }
 
   private static function queryAPI($url) {

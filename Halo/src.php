@@ -16,8 +16,13 @@ function getPlayerProfilePage() {
   $huskyProfile = API::getPlayerHuskyRaidStats($player);
   $superFiestaProfile = API::getPlayerSuperFiestaStats($player);
   $infectionProfile = API::getPlayerInfectionStats($player);
+  $profilePage = new ProfilePage($overallProfile, $huskyProfile, $superFiestaProfile, $infectionProfile);
+  $matches = API::getPlayerMatches($player);
+
   $ajaxResponse = array(
-    "profilePage" => (new ProfilePage($overallProfile, $huskyProfile, $superFiestaProfile, $infectionProfile))->getHtml()
+    "profilePage" => $profilePage->getHtml(),
+    "matches" => json_encode($matches),
+    "matchInfo" =>  null
   );
   echo json_encode($ajaxResponse); 
   exit();
