@@ -77,15 +77,15 @@ class ProfilePage {
   private function getStatForArenaProfile($arenaProfile) {
     ob_start();
 ?>    
-  <div class="row pt-3">
+  <div class="row py-2 hoverDiv">
     <div class="col-md-7">Total Kills</div>
     <div class="col-md-5"><?php echo $arenaProfile->getTotalKills(); ?></div>
   </div>
-  <div class="row pt-3">
+  <div class="row py-2 hoverDiv">
     <div class="col-md-7">Total Deaths</div>
     <div class="col-md-5"><?php echo $arenaProfile->getTotalDeaths(); ?></div>
   </div>
-  <div class="row pt-3">
+  <div class="row py-2 hoverDiv">
     <div class="col-md-7"><abbr title="Kill Death Ratio">KDR</abbr></div>
     <div class="col-md-5"><?php
     if ($arenaProfile->getTotalDeaths() == 0) { echo 0; } else {
@@ -93,15 +93,15 @@ class ProfilePage {
     }
      ?></div>
   </div>
-  <div class="row pt-3">
+  <div class="row py-2 hoverDiv">
     <div class="col-md-7">Total Shots Fired</div>
     <div class="col-md-5"><?php echo $arenaProfile->getTotalShotsFired(); ?></div>
   </div>
-  <div class="row pt-3">
+  <div class="row py-2 hoverDiv">
     <div class="col-md-7">Total Shots Landed</div>
     <div class="col-md-5"><?php echo $arenaProfile->getTotalShotsLanded(); ?></div>
   </div>
-  <div class="row pt-3">
+  <div class="row py-2 hoverDiv">
     <div class="col-md-7">Accuracy</div>
     <div class="col-md-5"><?php  
     if ($arenaProfile->getTotalShotsFired() == 0) { echo 0 . "%"; } else {
@@ -109,19 +109,19 @@ class ProfilePage {
     }
     ?></div>
   </div>
-  <div class="row pt-3">
+  <div class="row py-2 hoverDiv">
     <div class="col-md-7 ">Total Games Completed</div>
     <div class="col-md-5 "><?php echo $arenaProfile->getTotalGamesPlayed(); ?></div>
   </div>
-  <div class="row pt-3">
+  <div class="row py-2 hoverDiv">
     <div class="col-md-7 ">Total Games Won</div>
     <div class="col-md-5 "><?php echo $arenaProfile->getTotalGamesWon(); ?></div>
   </div>
-  <div class="row pt-3">
+  <div class="row py-2 hoverDiv">
     <div class="col-md-7 ">Total Games Lost</div>
     <div class="col-md-5 "><?php echo $arenaProfile->getTotalGamesLost(); ?></div>
   </div>
-  <div class="row pt-3">
+  <div class="row py-2 hoverDiv">
     <div class="col-md-7">Win %</div>
     <div class="col-md-5"><?php 
     if ($arenaProfile->getTotalGamesPlayed() == 0) { echo 0 . "%"; } else {

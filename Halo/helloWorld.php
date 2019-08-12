@@ -50,16 +50,36 @@
     
     <div id="profilePage">
     </div>
-    <div class="background-light-green pt-3">
+    <div class="background-light-green pt-3 pb-3">
       <div id="matchHistory" class=" jumbotron-white d-none container p-5 mt-3 border border-3 border-success rounded">
-        <h3>Last 10 matches with K/D <img class="float-right" src="/HaloStats/halo/map_legend.png"/></h3>
-        <div class="row pt-3" >
+        <h3>Last 10 matches with K/D <img class="float-right" src="/HaloStats/Halo/map_legend.PNG"/></h3>
+        <div class="row pt-3 pb-3" >
           <canvas id="matchGraph" >
           </canvas>   
         </div>
       </div>
     </div>
     <div id="matchInfo">
+    </div>
+    <div id="compareStats">
+      <div class="rounded p-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 offset-md-3">
+              <form class="form-inline pl-2">
+                <p class="text-left">You may compare the stats of 2 players below!</p> 
+                <div class="input-group">
+                  <input id="player1" type="text" class="form-control" size="80" placeholder="Enter Gamertag" required>
+                  <input id="player2" type="text" class="form-control" size="800" placeholder="Enter Gamertag" required>
+                  <div class="input-group-btn">
+                    <input type="button" id="compareSumbit" class="btn btn-success" value="Compare">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     
 

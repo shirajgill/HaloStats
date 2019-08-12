@@ -9,6 +9,11 @@
       "route" : "/haloStats/playerStats",
       "file" : "Halo/src.php",
       "function" : "getPlayerProfilePage"
+    },
+    { 
+      "route" : "/haloStats/match",
+      "file" : "Halo/src.php",
+      "function" : "getMatchPage"
     }
   ]
 }

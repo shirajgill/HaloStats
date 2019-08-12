@@ -57,3 +57,5 @@
 .border-3 {
   border-width: 3px !important;
 }
+
+.hoverDiv:hover {  background: rgba(0, 90, 0, 0.5);}

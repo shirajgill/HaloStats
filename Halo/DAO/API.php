@@ -128,6 +128,24 @@ class API {
     return $matches;
   }
 
+  public static function getMatchDetails($matchId) {
+    $matchId = urlencode($matchId);
+    $url = "https://www.haloapi.com/stats/h5/arena/matches/$matchId";
+    $response = self::queryAPI($url);
+    $response = json_decode($response);
+    $currMatch = new Match(null, $matchId, $response->MapId, null);
+
+    foreach ($response->PlayerStats as $player) {
+      $profile = new Profile($player->Player->Gamertag);
+      $profile->setTotalKills($player->TotalKills)
+      ->setTotalDeaths($player->TotalDeaths)
+      ->setTotalShotsFired($player->TotalShotsFired)
+      ->setTotalShotsLanded($player->TotalShotsLanded);
+      $currMatch->addToPlayerList($profile);
+    }
+    return $currMatch;
+  }
+
   private static function queryAPI($url) {
     //Create a stream with these options
     $opts = array(

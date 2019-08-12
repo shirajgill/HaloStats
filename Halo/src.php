@@ -3,6 +3,7 @@
 use DAO\API;
 use Data\ArenaProfile;
 use View\ProfilePage;
+use View\MatchPage;
 
 // This sample uses the Apache HTTP client from HTTP Components (http://hc.apache.org/httpcomponents-client-ga/)
 function homePage () {
@@ -24,6 +25,16 @@ function getPlayerProfilePage() {
     "matches" => json_encode($matches),
     "matchInfo" =>  null
   );
+  echo json_encode($ajaxResponse); 
+  exit();
+}
+
+
+function getMatchPage() {
+  $matchId = $_POST["matchId"];
+  $match = API::getMatchDetails($matchId);
+  $matchPage = new MatchPage($match);
+  $ajaxResponse = $matchPage->getHtml();
   echo json_encode($ajaxResponse); 
   exit();
 }

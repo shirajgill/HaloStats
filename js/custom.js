@@ -1,6 +1,13 @@
 var matches;
 $(document).ready(function(){
   $("#submitText").click(submitGamerTag);
+  $(document).on("click",".getStats", function() {
+    $("#getMatches").val($(this).data("gamertag"));
+    submitGamerTag();
+    $([document.documentElement, document.body]).animate({
+      scrollTop: $("#profilePage").offset().top
+    }, 1000);
+  });
   $("#pre-selected-gamertags button").click(preselectGamertag);
 });
 
@@ -18,6 +25,9 @@ function submitGamerTag() {
       $("#matchGraph").replaceWith("<canvas id=\"matchGraph\" ></canvas>");   
       displayMatchGraph(matches);
       $("#matchHistory").removeClass("d-none");
+      $([document.documentElement, document.body]).animate({
+        scrollTop: $("#profilePage").offset().top
+      }, 1000);
     }, 
     error: function(result) {
       console.log(result);
@@ -124,13 +134,31 @@ function displayMatchGraph(matches) {
 
 
 
-
   $("#matchGraph").click(
-      function (evt) {
-          var activePoints = myChart.getElementAtEvent(evt);
-          //var url = "http://example.com/?label=" + activePoints[0].label + "&value=" + activePoints[0].value;
-          var Values = activePoints[0]._index;
-          alert(Values);
-      }
+    function (evt) {
+        var activePoints = myChart.getElementAtEvent(evt);
+        getMatchInfoFor(activePoints[0]._index);
+        $([document.documentElement, document.body]).animate({
+          scrollTop: $("#matchInfo").offset().top
+        }, 1000);
+    }
   );
+}
+
+function getMatchInfoFor(index) {
+  $.ajax({
+    type : "POST",
+    url: "HaloStats/match",
+    data: {
+      matchId : matches[index].matchId
+    },
+    success: function(result) {
+      result = JSON.parse(result);
+      $("#matchInfo").html(result);
+    }, 
+    error: function(result) {
+      console.log(result);
+    }
+  });
+
 }
