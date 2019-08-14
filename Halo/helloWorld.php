@@ -69,8 +69,8 @@
               <form class="form-inline pl-2">
                 <p class="text-left">You may compare the stats of 2 players below!</p> 
                 <div class="input-group">
-                  <input id="player1" type="text" class="form-control" size="80" placeholder="Enter Gamertag" required>
-                  <input id="player2" type="text" class="form-control" size="800" placeholder="Enter Gamertag" required>
+                  <input id="user1" type="text" class="form-control" size="80" value="ll zD ll" required>
+                  <input id="user2" type="text" class="form-control" size="800" value="Le Ananaz" required>
                   <div class="input-group-btn">
                     <input type="button" id="compareSumbit" class="btn btn-success" value="Compare">
                   </div>
@@ -78,6 +78,10 @@
               </form>
             </div>
           </div>
+        </div>  
+        <div id="compareStatsInfo">
+          
+        </div>
         </div>
       </div>
     </div>

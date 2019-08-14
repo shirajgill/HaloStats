@@ -13,6 +13,10 @@ class API {
   private static $superFiestaId = "f0c9ef9a-48bd-4b24-9db3-2c76b4e23450";
   private static $arenaStats = null;
 
+  public static function flushStats() {
+    Self::$arenaStats= null;
+  }
+  
   public static function getPlayerOverallStats($gamerTag) {
     $stats = Self::getPlayerStatsForPlaylist($gamerTag);
     $profile = Self::createProfileForPlaylistStat($gamerTag, $stats);

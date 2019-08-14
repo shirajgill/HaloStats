@@ -8,6 +8,12 @@ $(document).ready(function(){
       scrollTop: $("#profilePage").offset().top
     }, 1000);
   });
+  $(document).on("click","#compareSumbit", function() {
+    getCompareStats($("#user1").val(), $("#user2").val());
+    $([document.documentElement, document.body]).animate({
+      scrollTop: $("#compareStatsInfo").offset().top
+    }, 1000);
+  });
   $("#pre-selected-gamertags button").click(preselectGamertag);
 });
 
@@ -155,6 +161,24 @@ function getMatchInfoFor(index) {
     success: function(result) {
       result = JSON.parse(result);
       $("#matchInfo").html(result);
+    }, 
+    error: function(result) {
+      console.log(result);
+    }
+  });
+}
+
+function getCompareStats(user1, user2) {
+  $.ajax({
+    type : "POST",
+    url: "HaloStats/compare",
+    data: {
+      user1 : user1,
+      user2 : user2
+    },
+    success: function(result) {
+      result = JSON.parse(result);
+      $("#compareStatsInfo").html(result);
     }, 
     error: function(result) {
       console.log(result);
