@@ -52,7 +52,7 @@
     </div>
     <div class="background-light-green pt-3 pb-3">
       <div id="matchHistory" class=" jumbotron-white d-none container p-5 mt-3 border border-3 border-success rounded">
-        <h3>Last 10 matches with K/D <img class="float-right" src="/HaloStats/Halo/map_legend.PNG"/></h3>
+        <h3>Last 10 matches with K/D <small>(Click bar for match details)</small><img class="float-right" src="/HaloStats/Halo/map_legend.PNG"/></h3>
         <div class="row pt-3 pb-3" >
           <canvas id="matchGraph" >
           </canvas>   
